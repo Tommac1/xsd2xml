@@ -88,7 +88,8 @@ pytest
 
 ## 🤝 Contributing
 
-We welcome contributions to **xsd2xml**! To keep the codebase clean and maintainable, we ask all contributors to follow a few guidelines before submitting their pull requests:
+We welcome contributions to **xsd2xml**! To keep the codebase clean and maintainable, we ask all contributors to
+follow a few guidelines before submitting their pull requests:
 
 ### 📝 Guidelines
 

@@ -48,13 +48,11 @@ jobs:
     - name: Package application
       run: |
         python -m build
-        pip install dist/*.whl
 
     - name: Test package
       run: |
-        # TODO
-        # chmod +x ./test/test_package.sh
-        # ./test/test_package.sh
+        pip install dist/*.whl
+        xsd2xml --version
 
     - name: Make release
       uses: softprops/action-gh-release@v2

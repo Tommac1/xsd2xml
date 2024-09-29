@@ -3,7 +3,12 @@
 import argparse
 import xmlschema
 
-from xsd2xml import xsd2xml
+try:
+    from .version import __version__
+except ImportError:
+    from version import __version__
+
+import xsd2xml
 
 
 def validate(xsd_path: str, xml_path: str):
@@ -12,9 +17,11 @@ def validate(xsd_path: str, xml_path: str):
 
 
 def parse_args() -> [str, str]:
-    parser = argparse.ArgumentParser(prog='Xsd2Xml', description='Generate XML from XSD schema file.')
+    parser = argparse.ArgumentParser(prog='xsd2xml', description='Generate XML from XSD schema file.')
     parser.add_argument('xsd_path', help='Path to XSD schema file.')
     parser.add_argument('xml_path', help='Path to generated XML file.')
+
+    parser.add_argument('--version', action='version', version=f'%(prog)s {__version__}')
 
     args = parser.parse_args()
     return args.xsd_path, args.xml_path

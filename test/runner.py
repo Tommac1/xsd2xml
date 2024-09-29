@@ -2,8 +2,8 @@ import os
 import xmlschema
 from pathlib import Path
 
+from src.xsd2xml import xsd2xml
 
-from xsd2xml import xsd2xml
 
 def get_project_root() -> Path:
     return Path(__file__).parent.parent

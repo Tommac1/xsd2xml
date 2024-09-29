@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xsd2xml"
-version = "0.1.0"
+dynamic = ["version"]
 authors = [{ name="Tomo Maczkowski", email="tom.maczkowski@gmail.com" }]
 description = "Generate XML from your XSD."
 license = {file = "LICENSE"}
@@ -29,3 +29,6 @@ Issues = "https://github.com/Tommac1/xsd2xml/issues"
 
 [project.scripts]
 xsd2xml = "xsd2xml.xsd2xml_cli:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "xsd2xml.__version__"}
