@@ -12,11 +12,19 @@ and reduces manual work.
 ---
 
 ## 💎 Features
+
 - Generate XML files from XSD schema files
-- Lightweight and easy to use
+- Lightweight and easy to use, uses only `xmlschema` and `xml.etree`
 - Available as a local wheel package for now
 - Python 3.10+ compatible
 - Future support for PyPI upload
+
+## 🚧 TODO
+
+- Add more docstring to the project
+- pylint compliance
+- Add release workflow
+- Implement more tests
 
 ---
 

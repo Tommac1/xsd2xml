@@ -11,13 +11,14 @@ def validate(xsd_path: str, xml_path: str):
     xs.validate(xml_path)
 
 
-def parse_args() -> tuple[str, str]:
+def parse_args() -> [str, str]:
     parser = argparse.ArgumentParser(prog='Xsd2Xml', description='Generate XML from XSD schema file.')
     parser.add_argument('xsd_path', help='Path to XSD schema file.')
     parser.add_argument('xml_path', help='Path to generated XML file.')
 
     args = parser.parse_args()
     return args.xsd_path, args.xml_path
+
 
 def main():
     xsd_path, xml_path = parse_args()

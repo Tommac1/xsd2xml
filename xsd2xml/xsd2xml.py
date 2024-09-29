@@ -1,12 +1,14 @@
-import re
-import rstr
 import string
 import random
 from pathlib import Path
 from typing import Type
 
+import rstr
 import xmlschema
-from xmlschema.validators import *
+from xmlschema.validators import (XsdGroup, XsdElement, XsdAnyElement, XsdSimpleType, XsdComplexType,
+                                  XsdAtomicRestriction, XsdTotalDigitsFacet, XsdFractionDigitsFacet,
+                                  XsdMinInclusiveFacet, XsdPatternFacets, XsdEnumerationFacets, XsdMaxLengthFacet,
+                                  XsdMinLengthFacet)
 import xml.etree.cElementTree as et
 
 
@@ -24,15 +26,15 @@ class Xsd2Xml:
         self.schema: Type[xmlschema.XMLSchema]
         self.schema = None
 
-
-    def rand_decimal(self, int_digs: int, frac_digs: int) -> float:
+    @staticmethod
+    def rand_decimal(int_digs: int, frac_digs: int) -> float:
         value = random.randint((10 ** (int_digs - 1)), ((10 ** int_digs) - 1))
         int_part = random.choice([-value, value])
         frac_part = random.randint((10 ** (frac_digs - 1)), ((10 ** frac_digs) - 1))
         return float('.'.join([str(int_part), str(frac_part)]))
 
-
-    def random_date(self, with_time=False, with_timezone=False) -> str:
+    @staticmethod
+    def random_date(with_time=False, with_timezone=False) -> str:
         def gen_month_day(mon: int) -> int:
             if mon in [1, 3, 5, 7, 8, 10, 12]:
                 return random.randint(1, 31)
@@ -55,7 +57,8 @@ class Xsd2Xml:
         value += f'{timezone:+03d}:00' if with_timezone else ''
         return value
 
-    def get_restriction(self, elem: XsdAtomicRestriction) -> dict:
+    @staticmethod
+    def get_restriction(elem: XsdAtomicRestriction | XsdSimpleType | XsdComplexType) -> dict:
         restr = {}
 
         print('elem', elem)
@@ -102,26 +105,15 @@ class Xsd2Xml:
             for c in group:
                 self.gen_element(parent, c)
 
-
-    def gen_attr(self, xml_elem: et.Element, elem: XsdElement):
+    @staticmethod
+    def gen_attr(xml_elem: et.Element, elem: XsdElement):
         for attr_name, attr_info in elem.attributes.items():
             # Generate random data for the attribute based on its type
-            attr_type = attr_info.type
             xml_elem.set(attr_name, 'ASD')
 
-
-    def gen_value(self, xml_elem: et.Element, elem: XsdElement, restr=None):
-        if restr is None:
-            restr = {}
-
-        def strip_ns(ns_name):
-            # String everything within {}.
-            if ns_name is not None:
-                return re.sub('{.*?}', '', ns_name)
-            return ''
-
+    def get_type(self, elem: XsdElement, restr=None) -> [str | dict]:
         base_types = ['string', 'decimal', 'integer', 'positiveInteger', 'dateTime', 'date']
-        if strip_ns(elem.type.name) in base_types:
+        if elem.type.local_name in base_types:
             # name = strip_ns(elem.type.name)
             name = elem.type.local_name
         elif elem.type.base_type.name is not None:
@@ -134,13 +126,20 @@ class Xsd2Xml:
                     base_type = base_type.base_type
                     name = base_type.local_name
                     if isinstance(base_type, XsdAtomicRestriction):
-                        print('is restr', name)
                         restr = self.get_restriction(self.schema.types[name])
-                        print(restr)
         else:
             name = ''
+
+        return name, restr
+
+    def gen_value(self, xml_elem: et.Element, elem: XsdElement, restr=None):
+        if restr is None:
+            restr = {}
+
+        name, restr = self.get_type(elem, restr)
+
         value = ''
-        print(f'{elem.name}, {name}, {xml_elem.tag}, {elem.local_name}')
+
         if name == 'string':
             value = ''.join(random.choice(string.ascii_letters) for _ in range(32))
             if 'patterns' in restr:
@@ -178,11 +177,9 @@ class Xsd2Xml:
 
         self.gen_attr(xml_elem, elem)
 
-
     def gen_restriction_value(self, xml_elem: et.Element, elem: XsdElement):
         restr = self.get_restriction(elem.type)
         self.gen_value(xml_elem, elem, restr)
-
 
     def gen_element_type(self, xml_elem: et.Element, elem: XsdElement):
         if isinstance(elem.type, XsdAnyElement):
@@ -197,7 +194,6 @@ class Xsd2Xml:
                 self.gen_restriction_value(xml_elem, elem)
             else:
                 self.gen_value(xml_elem, elem)
-
 
     def gen_element(self, parent: et.Element, elem: XsdElement):
         # Always at least 1 element.
@@ -215,7 +211,6 @@ class Xsd2Xml:
         self.schema = xmlschema.XMLSchema(self.xsd_path)
         self.root = self.__gen_xml(self.schema.root_elements[0])
         return self.root
-
 
     def save_xml(self, xml_path: str | Path):
         tree = et.ElementTree(self.root)
