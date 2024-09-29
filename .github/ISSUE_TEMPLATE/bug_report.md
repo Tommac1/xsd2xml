@@ -1,11 +1,12 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
+title: "[BUG] Bug with..."
+labels: bug
+assignees: Tommac1
 
 ---
+
 ## 🐛 Bug Report
 
 ---
