@@ -1,0 +1,8 @@
+-r requirements.txt
+
+pytest
+build
+setuptools
+pylint
+flake8
+pre-commit
