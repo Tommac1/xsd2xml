@@ -3,3 +3,6 @@ exclude =
         test
         venv
         .venv
+
+per-file-ignores =
+        src/xsd2xml/__init__.py:F401

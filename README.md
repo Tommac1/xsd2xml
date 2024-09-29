@@ -65,7 +65,7 @@ xsd2xml xsd_path xml_path
 
 Or you can use it in your source code:
 
-> 📝 If you only intend to use it as a source code, installing `reuquirements.txt` is enough. 📝
+> 📝 If you only intend to use it as a source code, installing `requirements.txt` is enough. 📝
 
 ```python
 from xsd2xml import xsd2xml
@@ -88,7 +88,8 @@ pytest
 
 ## 🤝 Contributing
 
-We welcome contributions to **xsd2xml**! To keep the codebase clean and maintainable, we ask all contributors to follow a few guidelines before submitting their pull requests:
+We welcome contributions to **xsd2xml**! To keep the codebase clean and maintainable, we ask all contributors to
+follow a few guidelines before submitting their pull requests:
 
 ### 📝 Guidelines
 
