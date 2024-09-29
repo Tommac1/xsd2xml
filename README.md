@@ -44,7 +44,7 @@ At the moment, **xsd2xml** is available only as a locally-built wheel package. H
 
 3. Build the wheel package:
     ```bash
-    pip install -r requirements.txt
+    pip install -r requirements-dev.txt
     python -m build
     ```
 
@@ -64,6 +64,8 @@ xsd2xml xsd_path xml_path
 ```
 
 Or you can use it in your source code:
+
+> 📝 If you only intend to use it as a source code, installing `reuquirements.txt` is enough. 📝
 
 ```python
 from xsd2xml import xsd2xml

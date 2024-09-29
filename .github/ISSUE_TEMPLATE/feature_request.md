@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: "[RFC] Add..."
+title: "[RFC] "
 labels: enhancement
 assignees: Tommac1
 
@@ -12,12 +12,15 @@ assignees: Tommac1
 ---
 
 ### 🌟 Description
+
 *A clear and concise description of the feature or enhancement you're proposing.*
 
 ### 🤔 Problem
+
 *What problem would this feature solve? Why is it needed?*
 
 ### 📝 Example usage
+
 *Provide a simple example of outcome of this implementation.*
 
 ### 🛠️ Additional Context

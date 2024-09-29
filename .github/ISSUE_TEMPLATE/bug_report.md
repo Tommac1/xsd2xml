@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: "[BUG] Bug with..."
+title: "[BUG] "
 labels: bug
 assignees: Tommac1
 
@@ -12,9 +12,11 @@ assignees: Tommac1
 ---
 
 ### 📰 Description
+
 *A clear and concise description of the bug.*
 
 ### 🔍 Steps to Reproduce
+
 1.
 2.
 3.
