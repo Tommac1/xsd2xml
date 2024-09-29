@@ -11,7 +11,7 @@ license = {file = "LICENSE"}
 readme = "README.md"
 requires-python = ">=3.10"
 keywords = ["xml", "xsd", "schema", "generation"]
-dependencies = ["pytest"]
+dependencies = ["xmlschema", "rstr"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",

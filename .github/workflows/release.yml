@@ -57,33 +57,11 @@ jobs:
         # ./test/test_package.sh
 
     - name: Make release
-      uses: actions/create-release@v1
-      id: create_release
+      uses: softprops/action-gh-release@v2
       with:
-        draft: false
-        prerelease: false
-        release_name: ${{ github.ref }}
-        tag_name: ${{ github.ref }}
         body_path: CHANGELOG.md
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Upload TGZ artifact
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/test_repo-0.0.1.tar.gz
-        asset_name: test_repo-0.0.1.tar.gz
-        asset_content_type: application/gzip
-
-    - name: Upload wheel artifact
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/test_repo-0.0.1-py3-none-any.whl
-        asset_name: test_repo-0.0.1-py3-none-any.whl
-        asset_content_type: application/pywheel
+        fail_on_unmatched_files: true
+        repository: Tommac1/xsd2xml
+        token: ${{ secrets.XSD2XML_TOKEN  }}
+        files: |
+          dist/*
