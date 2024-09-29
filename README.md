@@ -1,6 +1,6 @@
 # 💡 xsd2xml 💡
 
-![Build Status](https://github.com/Tommac1/xsd2xml/actions/workflows/github-actions.yml/badge.svg?branch=dev)
+![Build Status](https://github.com/Tommac1/xsd2xml/actions/workflows/build.yml/badge.svg?branch=dev)
 [![Python Version](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/release/python-3100/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Build Status](https://img.shields.io/badge/Status-Wheel%20Package%20Available-yellow.svg)](https://pypi.org/)
