@@ -1,37 +1,38 @@
-## 🐛 Bug Report
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: ''
+assignees: ''
 
 ---
 
-### 📰 Description
-*A clear and concise description of the bug.*
+**Describe the bug**
+A clear and concise description of what the bug is.
 
-### 🔍 Steps to Reproduce
-1.
-2.
-3.
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
 
-### 📝 Example Input
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-*Provide a minimal code example or input that triggers the bug.*
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
 
-### 🤔 Expected Behavior
+**Desktop (please complete the following information):**
+ - OS: [e.g. iOS]
+ - Browser [e.g. chrome, safari]
+ - Version [e.g. 22]
 
-*What you expected to happen.*
+**Smartphone (please complete the following information):**
+ - Device: [e.g. iPhone6]
+ - OS: [e.g. iOS8.1]
+ - Browser [e.g. stock browser, safari]
+ - Version [e.g. 22]
 
-### ⚠️ Actual Behavior
-
-*What actually happened.*
-
-### 💻 Environment Information
-
-- OS: *e.g., Windows 10 / macOS 12 / Ubuntu 20.04*
-- Python Version: *e.g., 3.9.5*
-- xsd2xml Version: *e.g., 0.1.0*
-
-### 📄 Additional Context
-
-*Any additional information, logs, or screenshots that may help us resolve the issue.*
-
----
-
-Thank you for helping us improve xsd2xml! 🙏
+**Additional context**
+Add any other context about the problem here.
