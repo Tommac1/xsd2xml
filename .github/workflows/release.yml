@@ -1,0 +1,88 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: release
+
+on:
+  push:
+    tags:
+      - '**' # Pattern matched against refs/tags
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.12"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements-dev.txt
+
+    - name: Lint with flake8
+      run: |
+        flake8 . --count --show-source --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Lint with pylint
+      run: |
+        pylint $(git ls-files *.py | grep -v 'test/')
+
+    - name: Test with pytest
+      run: |
+        pytest
+
+    - name: Package application
+      run: |
+        python -m build
+        pip install dist/*.whl
+
+    - name: Test package
+      run: |
+        # TODO
+        # chmod +x ./test/test_package.sh
+        # ./test/test_package.sh
+
+    - name: Make release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        release_name: ${{ github.ref }}
+        tag_name: ${{ github.ref }}
+        body_path: CHANGELOG.md
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Upload TGZ artifact
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist/test_repo-0.0.1.tar.gz
+        asset_name: test_repo-0.0.1.tar.gz
+        asset_content_type: application/gzip
+
+    - name: Upload wheel artifact
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist/test_repo-0.0.1-py3-none-any.whl
+        asset_name: test_repo-0.0.1-py3-none-any.whl
+        asset_content_type: application/pywheel

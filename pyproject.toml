@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xsd2xml"
+version = "0.1.0"
+authors = [{ name="Tomo Maczkowski", email="tom.maczkowski@gmail.com" }]
+description = "Generate XML from your XSD."
+license = {file = "LICENSE"}
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["xml", "xsd", "schema", "generation"]
+dependencies = ["pytest"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+
+    "License :: OSI Approved :: MIT License",
+
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/Tommac1/xsd2xml"
+Issues = "https://github.com/Tommac1/xsd2xml/issues"
+
+[project.scripts]
+xsd2xml = "xsd2xml.xsd2xml_cli:main"
